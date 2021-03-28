@@ -1,0 +1,58 @@
+*{
+    font-family: Indie Flower;
+    font-weight: bold;
+    cursor: grab;
+}
+.container{
+    min-height: 100vh;
+    background-color: aliceblue
+}
+#main{
+    margin-top: 100px;
+}
+.error{
+    color: red;
+    font-size: small;
+}
+#add{
+    margin-left: 110px;
+}
+h1{
+    margin-left: 150px;
+    margin-bottom: 20px;
+}
+.succes{
+    color: green;
+    font-size: small;
+}
+#box{
+    margin-top: 20px;
+}
+#quoteside{
+    margin-right: 60px;
+}
+#adda{
+    margin-top: 30px;
+    text-align-last: center;
+    margin-bottom: 10px;
+}
+#ema{
+    padding-left: 400px;
+}
+#like{
+    margin-left: 7px;
+    margin-bottom: 10px;
+}
+#logout{
+    margin-left: 5px;
+}
+#logbut{
+    text-decoration: none;
+    color: crimson;
+}
+#quotebox{
+    align-self: flex-start;
+}
+#quot{
+    text-align-last: center;
+}

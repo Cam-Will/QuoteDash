@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Berkshire+Swash&family=Chango&family=Indie+Flower&family=Pacifico&family=Ranchers&family=Redressed&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <title>Login & Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="container">
+        <div id="main" class="row align-items-center">
+            <div class="col">
+                <h1 class="display-2">REGISTER</h1>
+                <form method="post" action="/register">
+                    {% csrf_token %}
+                    <div class= "row mb-3">
+                        <label for="rfname" class="col-sm-2 col-form-label">First Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="rfname" name="rfname" placeholder="Enter First Name">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'rfname' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class= "row mb-3">
+                        <label for="rlname" class="col-sm-2 col-form-label">Last Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="rlname" name="rlname" placeholder="Enter Last Name">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'rlname' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="remail" class="col-sm-2 col-form-label">Email Address:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="remail" name="remail" placeholder="Enter Email">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'remail' or message.extra_tags == 'usemail' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="rpassword" class="col-sm-2 col-form-label">Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="rpassword" name="rpassword" placeholder="Enter Password">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'rpassword' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class= "row mb-3">
+                        <label for="conpass" class="col-sm-2 col-form-label">Confirm Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="conpass" name="conpass" placeholder="Enter Password again">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'conpass' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success btn-lg">Register</button>
+            </form>
+            </div>
+            <div class="col">
+                <h1 class="display-2">LOGIN</h1>
+                <form method="post" action="/login">
+                    {% csrf_token %}
+                    <div class= "row mb-3">
+                        <label for="lemail" class="col-sm-2 col-form-label">Email Address:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lemail" name="lemail">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'lemail' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class= "row mb-3">
+                        <label for="lpassword" class="col-sm-2 col-form-label">Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="lpassword" name="lpassword">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'lpassword' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success btn-lg">Log in</button>
+                  </form>
+            </div>
+        </div>
+</body>
+</html>

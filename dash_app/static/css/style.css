@@ -1,0 +1,22 @@
+*{
+    font-family: Ranchers;
+    cursor: grab;
+}
+.container{
+    min-height: 100vh;
+    background-color: aliceblue
+}
+#main{
+    margin-top: 100px;
+}
+.error{
+    color: red;
+    font-size: small;
+}
+button{
+    margin-left: 110px;
+}
+h1{
+    margin-left: 150px;
+    margin-bottom: 20px;
+}

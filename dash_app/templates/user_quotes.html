@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Berkshire+Swash&family=Chango&family=Indie+Flower&family=Pacifico&family=Ranchers&family=Redressed&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <title>Quote Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+</head>
+<body class="container">
+        <div id="main" class="row align-items-center">
+            <h3>{{ user.first_name }} {{ user.last_name }}'s Quotes</h3>
+            <div class="col">
+                <h4 id="quot" class="display-4">Quotes</h4>
+                {% for quote in quotes reversed %}
+                <div class="border rounded container-sm">
+                    <p>"{{ quote.quote }}"</p>
+                    <p> - {{ quote.author }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="logout" class="col">
+                <div>
+                    <a id="ema"  href="/quotes">Back</a>
+                    <button type="submit" class="btn btn-outline-danger"><a id="logbut" href="/logout">Logout</a></button>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

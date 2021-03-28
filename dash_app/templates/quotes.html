@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Berkshire+Swash&family=Chango&family=Indie+Flower&family=Pacifico&family=Ranchers&family=Redressed&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <title>Quote Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body class="container">
+        <div id="main" class="row align-items-center">
+            <h3>Welcome {{ request.session.fname }} {{ request.session.lname }}!</h3>
+            <div id="quoteside" class="col">
+                <h4 id="quot" class="display-4">Quotes</h4>
+                {% for quote in quotes reversed %}
+                <div id="box" class="border rounded container-sm">
+                    <p>"{{ quote.quote }}" - {{ quote.author }}</p>
+                    <p>Posted by: <a href="/user/{{quote.posted_by.id}}">{{ quote.posted_by.first_name }} {{ quote.posted_by.last_name }}</a></p>
+                    <p>{{ quote.users_liked.count }} people liked this</p>
+                    <form action="/like/{{ quote.id }}" method="post">
+                        {% csrf_token %}
+                        {% if quote.users_liked.id.exists %}
+                        <button type="submit" id="like" name="like" class="btn btn-outline-success btn-sm">Unike!</button>
+                        {% else %}
+                        <button type="submit" id="like" name="like" class="btn btn-outline-success btn-sm">Like!</button>
+                        {% endif %}
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            <div id= "quotebox" class="col">
+                <div>
+                    <a id="ema" href="/myaccount/{{ request.session.id }}">Edit My Account</a>
+                    <button id="logout" type="submit" class="btn btn-outline-danger"><a id="logbut" href="/logout">Logout</a></button>
+                </div>
+                <h4 id="adda" class="display-4">Add a Quote!</h4>
+                <form method="post" action="/addquote">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <label for="author" class="col-sm-2 col-form-label">Author:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="author" name="author" placeholder="Author name here">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'author' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class= "row mb-3">
+                        <label for="quote" class="col-sm-2 col-form-label">Quote:</label>
+                        <div class="col-sm-10">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.extra_tags == 'quote' %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>    
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                            <textarea class="form-control" placeholder="Post a Quote here" id="quote" name= "quote" style="height: 50px"></textarea>
+                        </div>
+                    </div>
+                    <button id="add" type="submit" class="btn btn-outline-success btn-lg"> Add! </button>
+                  </form>
+            </div>
+        </div>
+</body>
+</html>

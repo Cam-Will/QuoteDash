@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Berkshire+Swash&family=Chango&family=Indie+Flower&family=Pacifico&family=Ranchers&family=Redressed&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <title>Edit Account</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+</head>
+<body class="container">
+        <div id="main" class="row align-items-center">
+            <h3>Hey {{ request.session.fname }}, edit your account here.</h3>
+            <div class="col">
+                <h4 id="quot" class="display-3">Edit My Account</h4>
+                    <form action="/edit" method="post">
+                        {% csrf_token %}
+                        <div class= "row mb-3">
+                            <label for="efname" class="col-sm-2 col-form-label">First Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="efname" name="efname" value="{{ request.session.fname }}">
+                                {% if messages %}
+                                {% for message in messages %}
+                                {% if message.extra_tags == 'efname' %}
+                                        <p class="{{ message.tags }}">{{ message }}</p>    
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class= "row mb-3">
+                            <label for="elname" class="col-sm-2 col-form-label">Last Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="elname" name="elname" value="{{ request.session.lname }}">
+                                {% if messages %}
+                                {% for message in messages %}
+                                {% if message.extra_tags == 'elname' %}
+                                        <p class="{{ message.tags }}">{{ message }}</p>    
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="eemail" class="col-sm-2 col-form-label">Email Address:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="eemail" name="eemail" value="{{ request.session.email }}">
+                                {% if messages %}
+                                {% for message in messages %}
+                                {% if message.extra_tags == 'eemail' or message.extra_tags == 'ueemail' %}
+                                        <p class="{{ message.tags }}">{{ message }}</p>    
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% if messages %}
+                                {% for message in messages %}    
+                                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>    
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <button id="upbut" type="submit" class="btn btn-outline-success">Update</button>
+                    </form>
+            </div>
+            <div id="logout" class="col">
+                <a id="ema" href="/quotes">Back</a>
+                <button  type="submit" class="btn btn-outline-danger"><a id="logbut" href="/logout">Logout</a></button>
+            </div>
+        </div>
+</body>
+</html>
